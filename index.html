@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Primetech Güncel Tarifeler</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Primetech ana sayfa">
+        <img src="assets/primetech-logo.png" alt="Primetech Bilişim" />
+        <span>
+          <strong>Primetech Bilişim</strong>
+          <small>Güncel tarife kataloğu</small>
+        </span>
+      </a>
+      <nav class="top-actions" aria-label="Hızlı bağlantılar">
+        <a class="pdf-link" href="#magazalarimiz">Mağazalarımız</a>
+        <a class="pdf-link" href="tivibu-uydu/">Tivibu/Uydu sayfası</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Haziran 2026</p>
+          <h1>Mobil, ev interneti, DSL, Tivibu ve görevli tarifeleri tek ekranda.</h1>
+          <p class="lead">Müşteri “30 gb”, “öğretmen”, “100 mbps”, “selfy” ya da “tivibu” yazınca ilgili tarife ailesi ve tüm seçenekleri birlikte görünür.</p>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <img src="assets/primetech-logo.png" alt="" />
+          <div class="signal-card">
+            <strong>5G</strong>
+            <span>Fiber</span>
+            <small>Prime</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="telekom-strip" aria-label="Türk Telekom özel alanı">
+        <div>
+          <p class="eyebrow dark">Türk Telekom özel alanı</p>
+          <h2>Mobil, ev interneti ve Tivibu tekliflerini aynı görüşmede karşılaştır.</h2>
+        </div>
+        <div class="telekom-points">
+          <span>Prime ayrıcalıkları</span>
+          <span>Selfy genç tarifeleri</span>
+          <span>MEB kamu paketleri</span>
+          <span>Fiber / DSL hız seçenekleri</span>
+        </div>
+      </section>
+
+      <section class="visual-board" aria-label="Öne çıkan satış alanları">
+        <article>
+          <div class="visual-icon">GB</div>
+          <h2>Mobil paket karşılaştırma</h2>
+          <p>GB, dakika, SMS ve fiyatlar aynı satırda okunur.</p>
+        </article>
+        <article>
+          <div class="visual-icon">TV</div>
+          <h2>Tivibu ve Uydu</h2>
+          <p>Tivibu GO, kurulum ve paket ayrıcalıkları görsel kartlarla ayrılır.</p>
+        </article>
+        <article>
+          <div class="visual-icon">100</div>
+          <h2>Ev interneti hızları</h2>
+          <p>DSL, fiber ve limitsiz hız seçenekleri müşteri gözüyle listelenir.</p>
+        </article>
+      </section>
+
+      <section id="magazalarimiz" class="stores-section" aria-label="Mağazalarımız">
+        <div class="stores-head">
+          <p class="eyebrow dark">Mağazalarımız</p>
+          <h2>Size en yakın Primetech noktasına yol tarifi alın.</h2>
+          <p>Tarife seçimi, başvuru ve kampanya uygunluğu için mağazalarımızdan destek alabilirsiniz.</p>
+        </div>
+        <div class="store-grid">
+          <article class="store-card">
+            <span class="store-pin">01</span>
+            <h3>Primetech Mağaza 1</h3>
+            <p>Apple Maps üzerinden konumu açın ve yol tarifi alın.</p>
+            <a href="https://maps.apple/p/JTfCHb.LEpPnDR" target="_blank" rel="noopener">Yol tarifi al</a>
+          </article>
+          <article class="store-card">
+            <span class="store-pin">02</span>
+            <h3>Primetech Mağaza 2</h3>
+            <p>Google Maps üzerinden konumu açın ve yol tarifi alın.</p>
+            <a href="https://maps.app.goo.gl/iQ6rMg1Adrgy4jG86?g_st=iw" target="_blank" rel="noopener">Yol tarifi al</a>
+          </article>
+          <article class="store-card">
+            <span class="store-pin">03</span>
+            <h3>Primetech Mağaza 3</h3>
+            <p>Apple Maps üzerinden konumu açın ve yol tarifi alın.</p>
+            <a href="https://maps.apple/p/fBBuupZYRrLbHs" target="_blank" rel="noopener">Yol tarifi al</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="controls" aria-label="Tarife arama ve filtreleme">
+        <label class="search">
+          <span>Arama</span>
+          <input id="searchInput" type="search" placeholder="Örn: 30 gb, selfy, öğretmen meb, tivibu, 100 mbps" autocomplete="off" />
+        </label>
+        <div class="tabs" role="tablist" aria-label="Kategori">
+          <button class="tab active" type="button" data-category="all">Tümü</button>
+          <button class="tab" type="button" data-category="mobil">Mobil</button>
+          <button class="tab" type="button" data-category="ev">Ev İnterneti</button>
+          <button class="tab" type="button" data-category="tivibu">Tivibu/Uydu</button>
+          <button class="tab" type="button" data-category="dsl">DSL</button>
+          <button class="tab" type="button" data-category="gorevli">Görevli</button>
+        </div>
+      </section>
+
+      <section class="status-row">
+        <p id="resultCount">Tarifeler yükleniyor.</p>
+        <button id="clearSearch" type="button">Temizle</button>
+      </section>
+
+      <section id="cards" class="cards" aria-live="polite"></section>
+    </main>
+
+    <div id="detailModal" class="modal" hidden>
+      <div class="modal-backdrop" data-close-detail></div>
+      <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+        <button class="modal-close" type="button" aria-label="Detayı kapat" data-close-detail>×</button>
+        <div id="detailContent"></div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
