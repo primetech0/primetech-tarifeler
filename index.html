@@ -819,6 +819,9 @@ h1 {
 }
 
 .call-action {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 8px;
 }
 
@@ -833,6 +836,10 @@ h1 {
   border-radius: 8px;
   font-weight: 950;
   text-decoration: none;
+}
+
+.call-action .message-action {
+  background: linear-gradient(135deg, #168665, #20b56f);
 }
 
 .controls {
@@ -1417,10 +1424,14 @@ h1 {
   justify-content: space-between;
   gap: 14px;
   margin-top: 18px;
-  padding: 16px;
+  padding: 18px;
   color: #fff;
-  background: linear-gradient(135deg, #1268b3, #168665);
+  background:
+    linear-gradient(135deg, rgba(17, 54, 93, 0.98), rgba(18, 104, 179, 0.96)),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px 18px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 8px;
+  box-shadow: 0 16px 32px rgba(17, 54, 93, 0.18);
 }
 
 .contact-cta strong,
@@ -1451,10 +1462,11 @@ h1 {
   justify-content: center;
   min-height: 44px;
   padding: 0 18px;
-  color: #0e3b2c;
+  color: #10395f;
   background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.78);
   border-radius: 8px;
-  font-weight: 900;
+  font-weight: 950;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -1675,7 +1687,7 @@ h1 {
         <div class="alert-icon" aria-hidden="true">!</div>
         <div>
           <p class="eyebrow dark">Mobil tarife bilgilendirmesi</p>
-          <h2>21 Temmuz itibarıyla mobil tarifelerde fiyat güncellemesi beklenmektedir.</h2>
+          <h2>21 Temmuz itibarıyla mobil tarifelerde fiyat güncellemesi olacaktır.</h2>
           <p>Yeni başvuru ve geçiş işlemlerinde zam öncesi uygun paketleri kontrol etmeyi unutmayın.</p>
         </div>
         <div class="countdown" aria-label="21 Temmuz için geri sayım">
@@ -2181,7 +2193,7 @@ const detailModal = document.querySelector("#detailModal");
 const detailContent = document.querySelector("#detailContent");
 const homeSections = document.querySelectorAll(".home-section");
 const routeSections = document.querySelectorAll(".route-section");
-const whatsappPhone = "905075567817";
+const whatsappPhone = "905010735555";
 let activeCategory = "all";
 
 function normalize(value) {
@@ -2455,7 +2467,7 @@ function detailTemplate(item) {
     </section>
     <div class="contact-cta">
       <div>
-        <strong>Bu tarife için işlem yapmak ister misin?</strong>
+        <strong>Başvuru ve uygunluk desteği alın.</strong>
         <span>WhatsApp açılır, mesaj hazır gelir; gönderme işlemini müşteri kendisi yapar.</span>
         <code>${plainMessage}</code>
       </div>
