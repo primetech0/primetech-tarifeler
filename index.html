@@ -371,19 +371,20 @@ h1 {
 .price-alert {
   position: relative;
   display: grid;
-  grid-template-columns: 56px 1fr;
-  gap: 16px;
+  grid-template-columns: 58px minmax(0, 1fr) auto;
+  gap: 18px;
   align-items: center;
   margin-top: 16px;
-  padding: 18px 20px;
+  padding: 20px 22px;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 248, 255, 0.96)),
-    linear-gradient(90deg, rgba(18, 104, 179, 0.12), rgba(22, 134, 101, 0.12));
-  border: 1px solid rgba(18, 104, 179, 0.28);
-  border-left: 6px solid var(--blue);
+    radial-gradient(circle at 92% 18%, rgba(255, 202, 85, 0.3), transparent 26%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(239, 247, 255, 0.96)),
+    linear-gradient(90deg, rgba(18, 104, 179, 0.16), rgba(22, 134, 101, 0.13));
+  border: 1px solid rgba(18, 104, 179, 0.34);
+  border-left: 8px solid #f0a000;
   border-radius: 8px;
-  box-shadow: 0 16px 36px rgba(22, 56, 96, 0.12);
+  box-shadow: 0 18px 42px rgba(22, 56, 96, 0.16);
 }
 
 .price-alert::after {
@@ -400,12 +401,12 @@ h1 {
 .alert-icon {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   color: #fff;
-  background: linear-gradient(135deg, #1268b3, #168665);
+  background: linear-gradient(135deg, #f0a000, #1268b3);
   border-radius: 8px;
-  box-shadow: 0 12px 26px rgba(18, 104, 179, 0.24);
+  box-shadow: 0 12px 28px rgba(240, 160, 0, 0.25);
   font-size: 28px;
   font-weight: 950;
 }
@@ -427,6 +428,39 @@ h1 {
   margin-top: 7px;
   color: var(--muted);
   font-weight: 700;
+}
+
+.countdown {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 76px);
+  gap: 8px;
+}
+
+.countdown div {
+  display: grid;
+  place-items: center;
+  min-height: 70px;
+  padding: 10px 8px;
+  color: #fff;
+  background: linear-gradient(145deg, #113b68, #1268b3);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  box-shadow: 0 12px 26px rgba(18, 104, 179, 0.22);
+}
+
+.countdown strong {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.countdown span {
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .telekom-strip {
@@ -1545,6 +1579,19 @@ h1 {
     font-size: 24px;
   }
 
+  .countdown {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .countdown div {
+    min-height: 62px;
+  }
+
+  .countdown strong {
+    font-size: 23px;
+  }
+
   .orbit-one {
     width: 222px;
     height: 92px;
@@ -1631,6 +1678,20 @@ h1 {
           <h2>21 Temmuz itibarıyla mobil tarifelerde fiyat güncellemesi beklenmektedir.</h2>
           <p>Yeni başvuru ve geçiş işlemlerinde zam öncesi uygun paketleri kontrol etmeyi unutmayın.</p>
         </div>
+        <div class="countdown" aria-label="21 Temmuz için geri sayım">
+          <div>
+            <strong id="countdownDays">--</strong>
+            <span>Gün</span>
+          </div>
+          <div>
+            <strong id="countdownHours">--</strong>
+            <span>Saat</span>
+          </div>
+          <div>
+            <strong id="countdownMinutes">--</strong>
+            <span>Dakika</span>
+          </div>
+        </div>
       </section>
 
       <section class="telekom-strip home-section" aria-label="Türk Telekom özel alanı">
@@ -1644,24 +1705,6 @@ h1 {
           <span>MEB kamu paketleri</span>
           <span>Fiber / mevsimsel hız seçenekleri</span>
         </div>
-      </section>
-
-      <section class="visual-board home-section" aria-label="Öne çıkan satış alanları">
-        <article>
-          <div class="visual-icon">GB</div>
-          <h2>Mobil paket karşılaştırma</h2>
-          <p>GB, dakika, SMS ve fiyatlar aynı satırda okunur.</p>
-        </article>
-        <article>
-          <div class="visual-icon">9X</div>
-          <h2>Peşin fiyatına cihazlar</h2>
-          <p>Tecno ve Samsung cihazlarda hat üzerine ödeme seçenekleri ayrı sekmede görünür.</p>
-        </article>
-        <article>
-          <div class="visual-icon">100</div>
-          <h2>Ev interneti hızları</h2>
-          <p>Mevsimsel internet, fiber ve limitsiz hız seçenekleri müşteri gözüyle listelenir.</p>
-        </article>
       </section>
 
       <section class="controls home-section" aria-label="Tarife arama ve filtreleme">
@@ -2450,6 +2493,24 @@ function updateCurrentDate() {
   dateTarget.textContent = formatter.format(today);
 }
 
+function updateCountdown() {
+  const dayTarget = document.querySelector("#countdownDays");
+  const hourTarget = document.querySelector("#countdownHours");
+  const minuteTarget = document.querySelector("#countdownMinutes");
+  if (!dayTarget || !hourTarget || !minuteTarget) return;
+
+  const targetDate = new Date(2026, 6, 21, 0, 0, 0);
+  const remaining = Math.max(0, targetDate.getTime() - Date.now());
+  const totalMinutes = Math.floor(remaining / 60000);
+  const days = Math.floor(totalMinutes / 1440);
+  const hours = Math.floor((totalMinutes % 1440) / 60);
+  const minutes = totalMinutes % 60;
+
+  dayTarget.textContent = String(days);
+  hourTarget.textContent = String(hours).padStart(2, "0");
+  minuteTarget.textContent = String(minutes).padStart(2, "0");
+}
+
 function render() {
   const query = searchInput.value;
   const filtered = tariffs.filter((item) => {
@@ -2545,6 +2606,8 @@ window.addEventListener("hashchange", applyRoute);
 window.addEventListener("popstate", applyRoute);
 
 updateCurrentDate();
+updateCountdown();
+setInterval(updateCountdown, 60000);
 render();
 applyRoute();
 
