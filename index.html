@@ -368,6 +368,67 @@ h1 {
   font-weight: 800;
 }
 
+.price-alert {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 16px;
+  align-items: center;
+  margin-top: 16px;
+  padding: 18px 20px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 248, 255, 0.96)),
+    linear-gradient(90deg, rgba(18, 104, 179, 0.12), rgba(22, 134, 101, 0.12));
+  border: 1px solid rgba(18, 104, 179, 0.28);
+  border-left: 6px solid var(--blue);
+  border-radius: 8px;
+  box-shadow: 0 16px 36px rgba(22, 56, 96, 0.12);
+}
+
+.price-alert::after {
+  content: "21";
+  position: absolute;
+  right: 18px;
+  top: -26px;
+  color: rgba(18, 104, 179, 0.08);
+  font-size: 120px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.alert-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: #fff;
+  background: linear-gradient(135deg, #1268b3, #168665);
+  border-radius: 8px;
+  box-shadow: 0 12px 26px rgba(18, 104, 179, 0.24);
+  font-size: 28px;
+  font-weight: 950;
+}
+
+.price-alert h2,
+.price-alert p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.price-alert h2 {
+  max-width: 860px;
+  font-size: clamp(20px, 2.6vw, 29px);
+  line-height: 1.14;
+}
+
+.price-alert p:not(.eyebrow) {
+  margin-top: 7px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
 .telekom-strip {
   display: grid;
   grid-template-columns: minmax(260px, 0.9fr) 1.1fr;
@@ -1466,6 +1527,24 @@ h1 {
     width: 138px;
   }
 
+  .price-alert {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .price-alert::after {
+    right: 10px;
+    top: -18px;
+    font-size: 82px;
+  }
+
+  .alert-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+  }
+
   .orbit-one {
     width: 222px;
     height: 92px;
@@ -1542,6 +1621,15 @@ h1 {
           </div>
           <span class="hero-glow glow-one"></span>
           <span class="hero-glow glow-two"></span>
+        </div>
+      </section>
+
+      <section class="price-alert home-section" aria-label="Mobil tarife zam uyarısı">
+        <div class="alert-icon" aria-hidden="true">!</div>
+        <div>
+          <p class="eyebrow dark">Mobil tarife bilgilendirmesi</p>
+          <h2>21 Temmuz itibarıyla mobil tarifelerde fiyat güncellemesi beklenmektedir.</h2>
+          <p>Yeni başvuru ve geçiş işlemlerinde zam öncesi uygun paketleri kontrol etmeyi unutmayın.</p>
         </div>
       </section>
 
