@@ -377,6 +377,65 @@ h1 {
   align-items: center;
 }
 
+.route-section {
+  position: relative;
+  min-height: calc(100vh - 132px);
+  margin-top: 0;
+  padding: clamp(18px, 3vw, 30px);
+  overflow: hidden;
+  border: 1px solid rgba(18, 104, 179, 0.18);
+  box-shadow: 0 24px 70px rgba(17, 39, 66, 0.12);
+}
+
+.route-section[hidden] {
+  display: none;
+}
+
+.route-section::after {
+  content: "";
+  position: absolute;
+  right: -90px;
+  top: -90px;
+  width: 270px;
+  height: 270px;
+  background: radial-gradient(circle, rgba(18, 104, 179, 0.12), transparent 66%);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.route-top {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(18, 104, 179, 0.14);
+}
+
+.route-top a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 14px;
+  color: #11365d;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid #c8d9eb;
+  border-radius: 8px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.route-top a:first-child {
+  color: #fff;
+  background: #11365d;
+  border-color: #11365d;
+}
+
 .stores-head h2,
 .stores-head p {
   margin: 0;
@@ -1402,6 +1461,10 @@ h1 {
       <section id="cards" class="cards home-section" aria-live="polite"></section>
 
       <section id="magazalarimiz" class="stores-section page-section route-section" aria-label="Mağazalarımız" hidden>
+        <div class="route-top">
+          <a href="#top">Ana menüye dön</a>
+          <a href="#personellerimiz">Personellerimiz</a>
+        </div>
         <div class="stores-head">
           <p class="eyebrow dark">Mağazalarımız</p>
           <h2>Size en yakın Primetech noktasına yol tarifi alın.</h2>
@@ -1430,6 +1493,10 @@ h1 {
       </section>
 
       <section id="personellerimiz" class="staff-section page-section route-section" aria-label="Personellerimiz" hidden>
+        <div class="route-top">
+          <a href="#top">Ana menüye dön</a>
+          <a href="#magazalarimiz">Mağazalarımız</a>
+        </div>
         <div class="staff-head">
           <p class="eyebrow dark">Personellerimiz</p>
           <h2>Doğru işlem için doğru uzmana hızlıca ulaşın.</h2>
@@ -2325,6 +2392,7 @@ document.addEventListener("click", (event) => {
 function applyRoute() {
   const route = window.location.hash.replace("#", "");
   const isSubPage = route === "magazalarimiz" || route === "personellerimiz";
+  document.body.classList.toggle("subpage-open", isSubPage);
   homeSections.forEach((section) => {
     section.hidden = isSubPage;
   });
@@ -2336,6 +2404,11 @@ function applyRoute() {
       section.hidden = true;
     });
   }
+  document.title = route === "magazalarimiz"
+    ? "Primetech Mağazalarımız"
+    : route === "personellerimiz"
+      ? "Primetech Personellerimiz"
+      : "Primetech Güncel Tarifeler";
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
