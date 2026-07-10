@@ -1,0 +1,1 @@
+﻿GitHub Pages icin bu klasordeki index.html, magazalarimiz.html, personellerimiz.html ve .nojekyll dosyalarini repo ana dizinine yukle. CSS, JS ve logo HTML dosyalarinin icine gomuludur.
