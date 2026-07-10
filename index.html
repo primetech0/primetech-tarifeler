@@ -1384,8 +1384,8 @@ h1 {
         </span>
       </a>
       <nav class="top-actions" aria-label="Hızlı bağlantılar">
-        <a class="pdf-link" href="?page=magazalarimiz">Mağazalarımız</a>
-        <a class="pdf-link" href="?page=personellerimiz">Personellerimiz</a>
+        <a class="pdf-link" href="magazalarimiz.html">Mağazalarımız</a>
+        <a class="pdf-link" href="personellerimiz.html">Personellerimiz</a>
       </nav>
     </header>
 
@@ -1460,103 +1460,6 @@ h1 {
 
       <section id="cards" class="cards home-section" aria-live="polite"></section>
 
-      <section id="magazalarimiz" class="stores-section page-section route-section" aria-label="Mağazalarımız" hidden>
-        <div class="route-top">
-          <a href="./">Ana menüye dön</a>
-          <a href="?page=personellerimiz">Personellerimiz</a>
-        </div>
-        <div class="stores-head">
-          <p class="eyebrow dark">Mağazalarımız</p>
-          <h2>Size en yakın Primetech noktasına yol tarifi alın.</h2>
-          <p>Tarife seçimi, başvuru ve kampanya uygunluğu için mağazalarımızdan destek alabilirsiniz.</p>
-        </div>
-        <div class="store-grid">
-          <article class="store-card">
-            <span class="store-pin">01</span>
-            <h3>Primetech Mağaza 1</h3>
-            <p>Apple Maps üzerinden konumu açın ve yol tarifi alın.</p>
-            <a href="https://maps.apple/p/JTfCHb.LEpPnDR" target="_blank" rel="noopener">Yol tarifi al</a>
-          </article>
-          <article class="store-card">
-            <span class="store-pin">02</span>
-            <h3>Primetech Mağaza 2</h3>
-            <p>Google Maps üzerinden konumu açın ve yol tarifi alın.</p>
-            <a href="https://maps.app.goo.gl/iQ6rMg1Adrgy4jG86?g_st=iw" target="_blank" rel="noopener">Yol tarifi al</a>
-          </article>
-          <article class="store-card">
-            <span class="store-pin">03</span>
-            <h3>Primetech Mağaza 3</h3>
-            <p>Apple Maps üzerinden konumu açın ve yol tarifi alın.</p>
-            <a href="https://maps.apple/p/fBBuupZYRrLbHs" target="_blank" rel="noopener">Yol tarifi al</a>
-          </article>
-        </div>
-      </section>
-
-      <section id="personellerimiz" class="staff-section page-section route-section" aria-label="Personellerimiz" hidden>
-        <div class="route-top">
-          <a href="./">Ana menüye dön</a>
-          <a href="?page=magazalarimiz">Mağazalarımız</a>
-        </div>
-        <div class="staff-head">
-          <p class="eyebrow dark">Personellerimiz</p>
-          <h2>Doğru işlem için doğru uzmana hızlıca ulaşın.</h2>
-          <p>Tarife, cihaz, DSL ve destek süreçlerinde mağaza ekibimiz müşteriyi ilgili uzmanla buluşturur.</p>
-        </div>
-        <div class="staff-grid">
-          <article class="staff-card manager">
-            <span class="staff-avatar">MY</span>
-            <div>
-              <h3>Muzaffer YEŞİLYURT</h3>
-              <p>Mağaza Müdürü</p>
-              <button class="staff-phone" type="button" data-phone="05059195555" aria-expanded="false">
-                0505 919 55 55
-              </button>
-              <div class="call-action" hidden>
-                <a href="tel:05059195555">Ara</a>
-              </div>
-            </div>
-          </article>
-          <article class="staff-card">
-            <span class="staff-avatar">MA</span>
-            <div>
-              <h3>Mehmet Ali ALAN</h3>
-              <p>Cihaz Uzmanı</p>
-              <button class="staff-phone" type="button" data-phone="05075567817" aria-expanded="false">
-                0507 556 78 17
-              </button>
-              <div class="call-action" hidden>
-                <a href="tel:05075567817">Ara</a>
-              </div>
-            </div>
-          </article>
-          <article class="staff-card">
-            <span class="staff-avatar">ÖA</span>
-            <div>
-              <h3>Ömer Faruk AKSOY</h3>
-              <p>DSL Uzmanı</p>
-              <button class="staff-phone" type="button" data-phone="05333309367" aria-expanded="false">
-                0533 330 93 67
-              </button>
-              <div class="call-action" hidden>
-                <a href="tel:05333309367">Ara</a>
-              </div>
-            </div>
-          </article>
-          <article class="staff-card">
-            <span class="staff-avatar">BK</span>
-            <div>
-              <h3>Buse Duygu Keskin</h3>
-              <p>Mobil Tarife Uzmanı</p>
-              <button class="staff-phone" type="button" data-phone="05075155255" aria-expanded="false">
-                0507 515 52 55
-              </button>
-              <div class="call-action" hidden>
-                <a href="tel:05075155255">Ara</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
     </main>
 
     <div id="detailModal" class="modal" hidden>
@@ -2378,26 +2281,23 @@ document.addEventListener("click", (event) => {
 
 function applyRoute() {
   const params = new URLSearchParams(window.location.search);
-  const route = params.get("page") || window.location.hash.replace("#", "");
-  const isSubPage = route === "magazalarimiz" || route === "personellerimiz";
-  document.body.classList.toggle("subpage-open", isSubPage);
+  const legacyRoute = params.get("page") || window.location.hash.replace("#", "");
+  if (legacyRoute === "magazalarimiz") {
+    window.location.replace("magazalarimiz.html");
+    return;
+  }
+  if (legacyRoute === "personellerimiz") {
+    window.location.replace("personellerimiz.html");
+    return;
+  }
+  document.body.classList.remove("subpage-open");
   homeSections.forEach((section) => {
-    section.hidden = isSubPage;
+    section.hidden = false;
   });
   routeSections.forEach((section) => {
-    section.hidden = section.id !== route;
+    section.hidden = true;
   });
-  if (!isSubPage) {
-    routeSections.forEach((section) => {
-      section.hidden = true;
-    });
-  }
-  document.title = route === "magazalarimiz"
-    ? "Primetech Mağazalarımız"
-    : route === "personellerimiz"
-      ? "Primetech Personellerimiz"
-      : "Primetech Güncel Tarifeler";
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  document.title = "Primetech Güncel Tarifeler";
 }
 
 window.addEventListener("hashchange", applyRoute);
