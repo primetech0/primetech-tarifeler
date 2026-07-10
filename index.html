@@ -536,6 +536,46 @@ h1 {
   text-transform: uppercase;
 }
 
+.staff-phone {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  margin-top: 10px;
+  padding: 0 10px;
+  color: #11365d;
+  background: #eef5fb;
+  border: 1px solid #c8d9eb;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.staff-phone:hover,
+.staff-phone:focus-visible {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(18, 104, 179, 0.14);
+  outline: none;
+}
+
+.call-action {
+  margin-top: 8px;
+}
+
+.call-action a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 18px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--blue), var(--green));
+  border-radius: 8px;
+  font-weight: 950;
+  text-decoration: none;
+}
+
 .controls {
   display: grid;
   grid-template-columns: minmax(250px, 430px) 1fr;
@@ -1401,6 +1441,12 @@ h1 {
             <div>
               <h3>Muzaffer YEŞİLYURT</h3>
               <p>Mağaza Müdürü</p>
+              <button class="staff-phone" type="button" data-phone="05059195555" aria-expanded="false">
+                0505 919 55 55
+              </button>
+              <div class="call-action" hidden>
+                <a href="tel:05059195555">Ara</a>
+              </div>
             </div>
           </article>
           <article class="staff-card">
@@ -1408,6 +1454,12 @@ h1 {
             <div>
               <h3>Mehmet Ali ALAN</h3>
               <p>Cihaz Uzmanı</p>
+              <button class="staff-phone" type="button" data-phone="05075567817" aria-expanded="false">
+                0507 556 78 17
+              </button>
+              <div class="call-action" hidden>
+                <a href="tel:05075567817">Ara</a>
+              </div>
             </div>
           </article>
           <article class="staff-card">
@@ -1415,6 +1467,12 @@ h1 {
             <div>
               <h3>Ömer Faruk AKSOY</h3>
               <p>DSL Uzmanı</p>
+              <button class="staff-phone" type="button" data-phone="05333309367" aria-expanded="false">
+                0533 330 93 67
+              </button>
+              <div class="call-action" hidden>
+                <a href="tel:05333309367">Ara</a>
+              </div>
             </div>
           </article>
           <article class="staff-card">
@@ -1422,6 +1480,12 @@ h1 {
             <div>
               <h3>Buse Duygu Keskin</h3>
               <p>Mobil Tarife Uzmanı</p>
+              <button class="staff-phone" type="button" data-phone="05075155255" aria-expanded="false">
+                0507 515 52 55
+              </button>
+              <div class="call-action" hidden>
+                <a href="tel:05075155255">Ara</a>
+              </div>
             </div>
           </article>
           <article class="staff-card">
@@ -1429,6 +1493,12 @@ h1 {
             <div>
               <h3>Nazlı KILIÇ</h3>
               <p>Müşteri Destek Uzmanı</p>
+              <button class="staff-phone" type="button" data-phone="05434367200" aria-expanded="false">
+                0543 436 72 00
+              </button>
+              <div class="call-action" hidden>
+                <a href="tel:05434367200">Ara</a>
+              </div>
             </div>
           </article>
         </div>
@@ -2231,6 +2301,25 @@ clearSearch.addEventListener("click", () => {
   searchInput.value = "";
   searchInput.focus();
   render();
+});
+
+document.addEventListener("click", (event) => {
+  const phoneButton = event.target.closest(".staff-phone");
+  if (!phoneButton) return;
+
+  const card = phoneButton.closest(".staff-card");
+  const action = card?.querySelector(".call-action");
+  if (!action) return;
+
+  document.querySelectorAll(".call-action").forEach((item) => {
+    if (item !== action) item.hidden = true;
+  });
+  document.querySelectorAll(".staff-phone").forEach((item) => {
+    if (item !== phoneButton) item.setAttribute("aria-expanded", "false");
+  });
+
+  action.hidden = !action.hidden;
+  phoneButton.setAttribute("aria-expanded", String(!action.hidden));
 });
 
 function applyRoute() {
