@@ -2050,7 +2050,7 @@ h1 {
         <div class="telekom-points">
           <span>Prime ayrıcalıkları</span>
           <span>Selfy genç tarifeleri</span>
-          <span>Kamp paketleri</span>
+              <span>Kamu Tarifeleri</span>
           <span>Fiber / mevsimsel hız seçenekleri</span>
         </div>
       </section>
@@ -2193,14 +2193,14 @@ const tariffs = [
     category: "aksesuar",
     title: "Aksesuarlarımız",
     subtitle: "%30 indirim kodu oluşturma",
-    features: ["%30 indirim", "Tek tıkla kod", "Mağaza içi kullanım"],
-    note: "Kod, aksesuar alışverişlerinde mağaza personeli tarafından kontrol edilerek uygulanır.",
-    keywords: "aksesuar aksesuarlarımız indirim kodu yüzde 30 kod al kılıf cam şarj kablo kulaklık",
+    features: ["Kılıf", "Ekran koruyucu", "Lens koruyucu"],
+    note: "Kod sadece kılıf, ekran koruyucu ve lens koruyucu ürünlerinde geçerlidir; şarj aleti, kulaklık, kablo ve diğer ürünlerde uygulanmaz.",
+    keywords: "aksesuar aksesuarlarımız indirim kodu yüzde 30 kod al kılıf cam ekran koruyucu lens koruyucu kamera lens",
     discountTool: true,
     variants: [
-      ["Kılıf ve ekran koruyucu", "%30", "İndirim kodu ile"],
-      ["Şarj ve kablo ürünleri", "%30", "İndirim kodu ile"],
-      ["Kulaklık ve yan ürünler", "%30", "İndirim kodu ile"]
+      ["Telefon kılıfı", "%30", "İndirim kodu ile"],
+      ["Ekran koruyucu", "%30", "İndirim kodu ile"],
+      ["Kamera lens koruyucu", "%30", "İndirim kodu ile"]
     ]
   },
   {
@@ -2693,7 +2693,7 @@ function detailsFor(item) {
       gorevli: ["İlgili kamu kurumu/personel şartını sağlayan bireysel müşteriler.", "Referans veya belge kontrolü gerekebilir."],
       tivibu: ["Yeni Tivibu, Tivibu Ev veya Tivibu Uydu müşterileri.", "IPTV/Uydu kurulum uygunluğu satış öncesinde kontrol edilmelidir."],
       cihaz: ["Türk Telekom hattı üzerine cihaz alımına uygun müşteriler.", "Taksit, limit ve stok uygunluğu mağazada kontrol edilir."],
-      aksesuar: ["Mağazadan aksesuar almak isteyen müşteriler.", "İndirim kodu tek tıkla oluşturulur."]
+      aksesuar: ["Kılıf, ekran koruyucu veya kamera lens koruyucu almak isteyen müşteriler.", "İndirim kodu tek tıkla oluşturulur."]
     },
     privileges: {
       mobil: ["Aşımsızlık veya kontrol paketi uygun tarifelerde sunulur.", "Türk Telekomlularla konuşma, WhatsApp, Prime ya da dijital servis faydaları tarifeye göre değişir."],
@@ -2702,7 +2702,7 @@ function detailsFor(item) {
       gorevli: ["Kamu personeline özel fiyatlar.", "Aşmayan tarife, 1000 SMS ve yurt dışı kullanım faydaları MEB tarifelerinde öne çıkar."],
       tivibu: ["Tivibu GO hediyesi.", "Aktivasyon dahil paket seçenekleri.", "Uydu tarafında ücretsiz self kurulum seçenekleri."],
       cihaz: ["Peşin fiyatına cihaz fırsatı.", "Hattın üzerine ödeme kolaylığı.", "Mağazada uygunluk ve limit kontrolü."],
-      aksesuar: ["Tek tıkla indirim kodu oluşturma.", "Aksesuar alışverişlerinde %30 indirim.", "Kod mağaza içinde personel kontrolüyle uygulanır."]
+      aksesuar: ["Tek tıkla indirim kodu oluşturma.", "Sadece kılıf, ekran koruyucu ve kamera lens koruyucuda %30 indirim.", "Kod mağaza içinde personel kontrolüyle uygulanır."]
     },
     commitment: {
       mobil: ["Taahhüt ve kayıt SMS’i tarifeye göre değişir; satış ekranındaki güncel SMS formatı kontrol edilmelidir.", "Kontrol Sizde için uygun tarifelerde KONTROL SIZDE yazıp 5555’e SMS gönderilebilir."],
@@ -2711,7 +2711,7 @@ function detailsFor(item) {
       gorevli: ["MEB tarifeleri için MEB XGB TCKN yazıp 5555’e SMS gönderilir.", "Referansla geçişte referans numarası 6008’e gönderilir."],
       tivibu: ["Tivibu paketlerinde taahhüt süresi 12 veya 18 ay olabilir.", "Uydu self kurulum ve aktivasyon koşulları paket türüne göre kontrol edilir."],
       cihaz: ["Cihaz taksiti ve ödeme planı mağazada başvuru sırasında teyit edilir.", "Satış limit ve stok uygunluğuna göre tamamlanır."],
-      aksesuar: ["Kod oluşturma işlemi satış öncesi bilgilendirme amaçlıdır.", "İndirim uygulaması stok ve mağaza koşullarına göre teyit edilir."]
+      aksesuar: ["Kod oluşturma işlemi satış öncesi bilgilendirme amaçlıdır.", "Şarj aleti, kulaklık, kablo ve diğer aksesuar grupları bu indirime dahil değildir.", "İndirim uygulaması stok ve mağaza koşullarına göre teyit edilir."]
     }
   };
 
@@ -2760,9 +2760,9 @@ function detailsFor(item) {
     privileges = ["Peşin fiyatına cihaz fırsatı.", "Hattın üzerine ödeme kolaylığı.", "Mağazada uygunluk ve limit kontrolü.", "WhatsApp ile hızlı bilgi alma.", ...item.features];
     commitment = ["Cihaz taksiti ve ödeme planı mağazada başvuru sırasında teyit edilir.", "Tecno Spark 50 5G için 6 taksit bilgisi girildi.", "Samsung A07 5G için 9 taksit bilgisi girildi."];
   } else if (item.category === "aksesuar") {
-    eligibility = ["Mağazadan aksesuar almak isteyen müşteriler.", "Kod almak için aksesuar detayındaki Kod al butonuna basılır."];
-    privileges = ["Tek tıkla %30 indirim kodu oluşturulur.", "Kod müşteri ekranında gösterilir, otomatik gönderilmez.", ...item.features];
-    commitment = ["Kod mağaza içi kullanım için tasarlanmıştır.", "Personel indirim uygunluğunu işlem sırasında kontrol eder."];
+    eligibility = ["Kılıf, ekran koruyucu veya kamera lens koruyucu almak isteyen müşteriler.", "Kod almak için aksesuar detayındaki Kod al butonuna basılır."];
+    privileges = ["Tek tıkla %30 indirim kodu oluşturulur.", "Kod müşteri ekranında gösterilir, otomatik gönderilmez.", "İndirim sadece kılıf, ekran koruyucu ve lens koruyucu ürünlerinde geçerlidir."];
+    commitment = ["Kod mağaza içi kullanım için tasarlanmıştır.", "Şarj aleti, kulaklık, kablo ve diğer ürünler kapsam dışıdır.", "Personel indirim uygunluğunu işlem sırasında kontrol eder."];
   }
 
   return { eligibility, privileges, commitment };
@@ -2782,7 +2782,7 @@ function detailTemplate(item) {
     <section class="discount-tool" aria-label="Aksesuar indirim kodu oluşturma">
       <div>
         <h3>%30 aksesuar indirim kodu</h3>
-        <p>Kod al butonuna basın, indirim kodu ekranda oluşsun.</p>
+        <p>Kod sadece kılıf, ekran koruyucu ve lens koruyucu için geçerlidir.</p>
       </div>
       <button class="discount-code-button" id="generateDiscountCode" type="button">Kod al</button>
       <div class="discount-result" id="discountResult" aria-live="polite">
