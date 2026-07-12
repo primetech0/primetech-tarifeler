@@ -735,7 +735,7 @@ h1 {
 
 .store-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 10px;
 }
 
@@ -1363,7 +1363,15 @@ h1 {
 }
 
 .detail-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
   padding-right: 52px;
+}
+
+.detail-head-copy {
+  min-width: 0;
 }
 
 .detail-head h2 {
@@ -1550,6 +1558,16 @@ h1 {
   font-weight: 950;
   text-decoration: none;
   white-space: nowrap;
+}
+
+.detail-whatsapp {
+  flex: 0 0 auto;
+  min-height: 38px;
+  padding: 0 14px;
+  color: #fff;
+  background: #168665;
+  border-color: #168665;
+  box-shadow: 0 10px 22px rgba(22, 134, 101, 0.2);
 }
 
 .empty {
@@ -1764,6 +1782,11 @@ h1 {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
+  }
+
+  .detail-head {
+    flex-direction: column;
+    gap: 12px;
   }
 
   .telekom-points {
@@ -2575,9 +2598,12 @@ function detailTemplate(item) {
     : `https://wa.me/?text=${message}`;
   return `
     <div class="detail-head">
-      <span class="badge ${item.category}">${categoryNames[item.category]}</span>
-      <h2 id="detailTitle">${item.title}</h2>
-      <p>${item.subtitle}</p>
+      <div class="detail-head-copy">
+        <span class="badge ${item.category}">${categoryNames[item.category]}</span>
+        <h2 id="detailTitle">${item.title}</h2>
+        <p>${item.subtitle}</p>
+      </div>
+      <a class="whatsapp-button detail-whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener">Bilgi al</a>
     </div>
     <section class="detail-section">
       <h3>Detay fiyatlandırma</h3>
@@ -2610,14 +2636,6 @@ function detailTemplate(item) {
         <p>${item.note}</p>
       </div>
     </section>
-    <div class="contact-cta">
-      <div>
-        <strong>Başvuru ve uygunluk desteği alın.</strong>
-        <span>WhatsApp açılır, mesaj hazır gelir; gönderme işlemini müşteri kendisi yapar.</span>
-        <code>${plainMessage}</code>
-      </div>
-      <a class="whatsapp-button" href="${whatsappUrl}" target="_blank" rel="noopener">İletişime geç</a>
-    </div>
   `;
 }
 
