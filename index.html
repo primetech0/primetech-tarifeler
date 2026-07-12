@@ -1631,7 +1631,7 @@ h1 {
 
 .discount-tool {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px) minmax(180px, 220px);
+  grid-template-columns: minmax(0, 1fr) auto minmax(180px, 220px);
   gap: 14px;
   align-items: end;
   margin-top: 18px;
@@ -1654,27 +1654,20 @@ h1 {
   color: #476253;
 }
 
-.discount-tool label {
-  display: grid;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 850;
-  color: #476253;
-}
-
-.discount-tool input {
+.discount-code-button {
   min-height: 42px;
   padding: 0 12px;
-  color: var(--ink);
-  background: #fff;
-  border: 1px solid rgba(22, 134, 101, 0.26);
+  color: #fff;
+  background: #168665;
+  border: 1px solid #168665;
   border-radius: 8px;
   font: inherit;
+  font-weight: 950;
+  cursor: pointer;
   outline: none;
 }
 
-.discount-tool input:focus {
-  border-color: #168665;
+.discount-code-button:focus {
   box-shadow: 0 0 0 3px rgba(22, 134, 101, 0.14);
 }
 
@@ -2057,7 +2050,7 @@ h1 {
         <div class="telekom-points">
           <span>Prime ayrıcalıkları</span>
           <span>Selfy genç tarifeleri</span>
-          <span>MEB kamu paketleri</span>
+          <span>Kamp paketleri</span>
           <span>Fiber / mevsimsel hız seçenekleri</span>
         </div>
       </section>
@@ -2199,10 +2192,10 @@ const tariffs = [
   {
     category: "aksesuar",
     title: "Aksesuarlarımız",
-    subtitle: "Telefon numarasıyla %30 indirim kodu oluşturma",
-    features: ["%30 indirim", "Telefon numarasıyla kod", "Mağaza içi kullanım"],
+    subtitle: "%30 indirim kodu oluşturma",
+    features: ["%30 indirim", "Tek tıkla kod", "Mağaza içi kullanım"],
     note: "Kod, aksesuar alışverişlerinde mağaza personeli tarafından kontrol edilerek uygulanır.",
-    keywords: "aksesuar aksesuarlarımız indirim kodu yüzde 30 telefon numarası kılıf cam şarj kablo kulaklık",
+    keywords: "aksesuar aksesuarlarımız indirim kodu yüzde 30 kod al kılıf cam şarj kablo kulaklık",
     discountTool: true,
     variants: [
       ["Kılıf ve ekran koruyucu", "%30", "İndirim kodu ile"],
@@ -2700,7 +2693,7 @@ function detailsFor(item) {
       gorevli: ["İlgili kamu kurumu/personel şartını sağlayan bireysel müşteriler.", "Referans veya belge kontrolü gerekebilir."],
       tivibu: ["Yeni Tivibu, Tivibu Ev veya Tivibu Uydu müşterileri.", "IPTV/Uydu kurulum uygunluğu satış öncesinde kontrol edilmelidir."],
       cihaz: ["Türk Telekom hattı üzerine cihaz alımına uygun müşteriler.", "Taksit, limit ve stok uygunluğu mağazada kontrol edilir."],
-      aksesuar: ["Mağazadan aksesuar almak isteyen müşteriler.", "İndirim kodu oluşturmak için müşteri telefon numarası girilir."]
+      aksesuar: ["Mağazadan aksesuar almak isteyen müşteriler.", "İndirim kodu tek tıkla oluşturulur."]
     },
     privileges: {
       mobil: ["Aşımsızlık veya kontrol paketi uygun tarifelerde sunulur.", "Türk Telekomlularla konuşma, WhatsApp, Prime ya da dijital servis faydaları tarifeye göre değişir."],
@@ -2709,7 +2702,7 @@ function detailsFor(item) {
       gorevli: ["Kamu personeline özel fiyatlar.", "Aşmayan tarife, 1000 SMS ve yurt dışı kullanım faydaları MEB tarifelerinde öne çıkar."],
       tivibu: ["Tivibu GO hediyesi.", "Aktivasyon dahil paket seçenekleri.", "Uydu tarafında ücretsiz self kurulum seçenekleri."],
       cihaz: ["Peşin fiyatına cihaz fırsatı.", "Hattın üzerine ödeme kolaylığı.", "Mağazada uygunluk ve limit kontrolü."],
-      aksesuar: ["Telefon numarasıyla kişiye özel indirim kodu.", "Aksesuar alışverişlerinde %30 indirim.", "Kod mağaza içinde personel kontrolüyle uygulanır."]
+      aksesuar: ["Tek tıkla indirim kodu oluşturma.", "Aksesuar alışverişlerinde %30 indirim.", "Kod mağaza içinde personel kontrolüyle uygulanır."]
     },
     commitment: {
       mobil: ["Taahhüt ve kayıt SMS’i tarifeye göre değişir; satış ekranındaki güncel SMS formatı kontrol edilmelidir.", "Kontrol Sizde için uygun tarifelerde KONTROL SIZDE yazıp 5555’e SMS gönderilebilir."],
@@ -2767,8 +2760,8 @@ function detailsFor(item) {
     privileges = ["Peşin fiyatına cihaz fırsatı.", "Hattın üzerine ödeme kolaylığı.", "Mağazada uygunluk ve limit kontrolü.", "WhatsApp ile hızlı bilgi alma.", ...item.features];
     commitment = ["Cihaz taksiti ve ödeme planı mağazada başvuru sırasında teyit edilir.", "Tecno Spark 50 5G için 6 taksit bilgisi girildi.", "Samsung A07 5G için 9 taksit bilgisi girildi."];
   } else if (item.category === "aksesuar") {
-    eligibility = ["Mağazadan aksesuar almak isteyen müşteriler.", "Kod oluşturmak için telefon numarası girilmesi gerekir."];
-    privileges = ["Telefon numarasına göre %30 indirim kodu oluşturulur.", "Kod müşteri ekranında gösterilir, otomatik gönderilmez.", ...item.features];
+    eligibility = ["Mağazadan aksesuar almak isteyen müşteriler.", "Kod almak için aksesuar detayındaki Kod al butonuna basılır."];
+    privileges = ["Tek tıkla %30 indirim kodu oluşturulur.", "Kod müşteri ekranında gösterilir, otomatik gönderilmez.", ...item.features];
     commitment = ["Kod mağaza içi kullanım için tasarlanmıştır.", "Personel indirim uygunluğunu işlem sırasında kontrol eder."];
   }
 
@@ -2789,15 +2782,12 @@ function detailTemplate(item) {
     <section class="discount-tool" aria-label="Aksesuar indirim kodu oluşturma">
       <div>
         <h3>%30 aksesuar indirim kodu</h3>
-        <p>Müşteri telefon numarasını yazın, kod ekranda oluşsun.</p>
+        <p>Kod al butonuna basın, indirim kodu ekranda oluşsun.</p>
       </div>
-      <label>
-        <span>Telefon numarası</span>
-        <input id="accessoryPhone" type="tel" inputmode="numeric" placeholder="05xx xxx xx xx" autocomplete="tel" />
-      </label>
+      <button class="discount-code-button" id="generateDiscountCode" type="button">Kod al</button>
       <div class="discount-result" id="discountResult" aria-live="polite">
         <span>İndirim kodu</span>
-        <strong>Numara bekleniyor</strong>
+        <strong>Kod bekleniyor</strong>
       </div>
     </section>
   ` : "";
@@ -2845,24 +2835,18 @@ function detailTemplate(item) {
   `;
 }
 
-function buildDiscountCode(phone) {
-  const digits = String(phone).replace(/\D/g, "");
-  if (digits.length < 10) return "";
-  const clean = digits.slice(-10);
-  let sum = 0;
-  clean.split("").forEach((digit, index) => {
-    sum += Number(digit) * (index + 3);
-  });
-  const suffix = String(sum % 10000).padStart(4, "0");
-  return `PRM30-${clean.slice(-4)}-${suffix}`;
+function buildDiscountCode() {
+  const now = new Date();
+  const daySeed = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}`;
+  const randomSeed = Math.floor(1000 + Math.random() * 9000);
+  return `PRM30-${daySeed.slice(4)}-${randomSeed}`;
 }
 
-function updateDiscountCode(input) {
+function updateDiscountCode() {
   const result = detailModal.querySelector("#discountResult strong");
   if (!result) return;
-  const code = buildDiscountCode(input.value);
-  result.textContent = code || "Numara bekleniyor";
-  result.classList.toggle("ready", Boolean(code));
+  result.textContent = buildDiscountCode();
+  result.classList.add("ready");
 }
 
 function openDetail(index) {
@@ -2938,6 +2922,15 @@ tabs.forEach((tab) => {
   });
 });
 
+document.querySelectorAll(".tab-group").forEach((group) => {
+  group.addEventListener("toggle", () => {
+    if (!group.open) return;
+    document.querySelectorAll(".tab-group").forEach((otherGroup) => {
+      if (otherGroup !== group) otherGroup.open = false;
+    });
+  });
+});
+
 cards.addEventListener("click", (event) => {
   const card = event.target.closest(".tariff-card");
   if (card) openDetail(Number(card.dataset.index));
@@ -2955,8 +2948,8 @@ detailModal.addEventListener("click", (event) => {
   if (event.target.closest("[data-close-detail]")) closeDetail();
 });
 
-detailModal.addEventListener("input", (event) => {
-  if (event.target.matches("#accessoryPhone")) updateDiscountCode(event.target);
+detailModal.addEventListener("click", (event) => {
+  if (event.target.matches("#generateDiscountCode")) updateDiscountCode();
 });
 
 document.addEventListener("keydown", (event) => {
