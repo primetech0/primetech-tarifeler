@@ -128,11 +128,63 @@ body::after {
   justify-content: flex-end;
 }
 
-.top-tabs .tab {
+.top-tabs .tab,
+.tab-group summary {
   min-height: 36px;
   padding: 0 10px;
   font-size: 13px;
   font-weight: 850;
+}
+
+.tab-group {
+  position: relative;
+}
+
+.tab-group summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tab-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.tab-group summary::after {
+  content: "⌄";
+  color: var(--blue);
+  font-size: 12px;
+}
+
+.tab-group[open] summary {
+  border-color: rgba(18, 104, 179, 0.36);
+  box-shadow: 0 8px 22px rgba(17, 54, 93, 0.1);
+}
+
+.tab-menu {
+  position: absolute;
+  z-index: 20;
+  right: 0;
+  top: calc(100% + 8px);
+  display: grid;
+  gap: 6px;
+  min-width: 210px;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 18px 40px rgba(17, 54, 93, 0.16);
+}
+
+.tab-menu .tab {
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .nav-separator {
@@ -1083,6 +1135,12 @@ h1 {
     repeating-linear-gradient(0deg, rgba(16, 24, 40, 0.07) 0 1px, transparent 1px 16px);
 }
 
+.category-aksesuar {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(237, 252, 246, 0.96)),
+    radial-gradient(circle at 84% 20%, rgba(22, 134, 101, 0.16), transparent 42%);
+}
+
 .card > * {
   position: relative;
   z-index: 1;
@@ -1125,6 +1183,7 @@ h1 {
 .dsl { background: var(--amber); }
 .gorevli { background: var(--danger); }
 .cihaz { background: #101828; }
+.aksesuar { background: #168665; }
 
 .device-visual {
   display: grid;
@@ -1570,6 +1629,79 @@ h1 {
   box-shadow: 0 10px 22px rgba(22, 134, 101, 0.2);
 }
 
+.discount-tool {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px) minmax(180px, 220px);
+  gap: 14px;
+  align-items: end;
+  margin-top: 18px;
+  padding: 16px;
+  color: #143525;
+  background:
+    linear-gradient(135deg, rgba(234, 255, 246, 0.98), rgba(255, 255, 255, 0.96)),
+    repeating-linear-gradient(135deg, rgba(22, 134, 101, 0.09) 0 1px, transparent 1px 16px);
+  border: 1px solid rgba(22, 134, 101, 0.2);
+  border-radius: 8px;
+}
+
+.discount-tool h3,
+.discount-tool p {
+  margin: 0;
+}
+
+.discount-tool p {
+  margin-top: 5px;
+  color: #476253;
+}
+
+.discount-tool label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 850;
+  color: #476253;
+}
+
+.discount-tool input {
+  min-height: 42px;
+  padding: 0 12px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid rgba(22, 134, 101, 0.26);
+  border-radius: 8px;
+  font: inherit;
+  outline: none;
+}
+
+.discount-tool input:focus {
+  border-color: #168665;
+  box-shadow: 0 0 0 3px rgba(22, 134, 101, 0.14);
+}
+
+.discount-result {
+  display: grid;
+  gap: 6px;
+  min-height: 42px;
+  padding: 9px 12px;
+  background: #143525;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.discount-result span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.discount-result strong {
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.discount-result strong.ready {
+  color: #9cf0c4;
+}
+
 .empty {
   grid-column: 1 / -1;
   padding: 30px;
@@ -1631,6 +1763,15 @@ h1 {
     justify-content: flex-start;
   }
 
+  .tab-menu {
+    left: 0;
+    right: auto;
+  }
+
+  .discount-tool {
+    grid-template-columns: 1fr;
+  }
+
   .live-support {
     align-items: flex-start;
   }
@@ -1675,10 +1816,19 @@ h1 {
     width: 100%;
   }
 
-  .top-tabs .tab {
+  .top-tabs .tab,
+  .tab-group summary {
     min-height: 34px;
     padding: 0 9px;
     font-size: 12px;
+  }
+
+  .tab-group {
+    position: static;
+  }
+
+  .tab-menu {
+    width: min(100%, 260px);
   }
 
   .nav-separator {
@@ -1820,12 +1970,28 @@ h1 {
       <nav class="top-actions" aria-label="Hızlı bağlantılar">
         <div class="top-tabs" role="tablist" aria-label="Kategori">
           <button class="tab active" type="button" data-category="all">Tümü</button>
-          <button class="tab" type="button" data-category="mobil">Mobil</button>
-          <button class="tab" type="button" data-category="ev">Ev İnterneti</button>
-          <button class="tab" type="button" data-category="tivibu">Tivibu/Uydu</button>
-          <button class="tab" type="button" data-category="dsl">Mevsimsel İnternetler</button>
-          <button class="tab" type="button" data-category="gorevli">Kamu Tarifeleri</button>
-          <button class="tab" type="button" data-category="cihaz">Peşin Fiyatına Cihazlar</button>
+          <details class="tab-group">
+            <summary>Mobil</summary>
+            <div class="tab-menu">
+              <button class="tab" type="button" data-category="mobil">Mobil Tarifeler</button>
+              <button class="tab" type="button" data-category="gorevli">Kamu Tarifeleri</button>
+            </div>
+          </details>
+          <details class="tab-group">
+            <summary>Ev İnternetleri</summary>
+            <div class="tab-menu">
+              <button class="tab" type="button" data-category="ev">Ev İnterneti</button>
+              <button class="tab" type="button" data-category="tivibu">TV/Uydu</button>
+              <button class="tab" type="button" data-category="dsl">Mevsimsel İnternetler</button>
+            </div>
+          </details>
+          <details class="tab-group">
+            <summary>Peşin Fiyatına Cihazlar</summary>
+            <div class="tab-menu">
+              <button class="tab" type="button" data-category="cihaz">Peşin Fiyatına Cihazlar</button>
+              <button class="tab" type="button" data-category="aksesuar">Aksesuarlarımız</button>
+            </div>
+          </details>
         </div>
         <span class="nav-separator" aria-hidden="true"></span>
         <a class="pdf-link" href="magazalarimiz.html">Mağazalarımız</a>
@@ -2028,6 +2194,20 @@ const tariffs = [
       ["Samsung A07 5G", "13.456 TL", "Peşin fiyat"],
       ["Aylık ödeme", "1.495,11 TL", "9 taksit"],
       ["Ödeme tipi", "Hattın üzerine", "Limit kontrolü"]
+    ]
+  },
+  {
+    category: "aksesuar",
+    title: "Aksesuarlarımız",
+    subtitle: "Telefon numarasıyla %30 indirim kodu oluşturma",
+    features: ["%30 indirim", "Telefon numarasıyla kod", "Mağaza içi kullanım"],
+    note: "Kod, aksesuar alışverişlerinde mağaza personeli tarafından kontrol edilerek uygulanır.",
+    keywords: "aksesuar aksesuarlarımız indirim kodu yüzde 30 telefon numarası kılıf cam şarj kablo kulaklık",
+    discountTool: true,
+    variants: [
+      ["Kılıf ve ekran koruyucu", "%30", "İndirim kodu ile"],
+      ["Şarj ve kablo ürünleri", "%30", "İndirim kodu ile"],
+      ["Kulaklık ve yan ürünler", "%30", "İndirim kodu ile"]
     ]
   },
   {
@@ -2340,7 +2520,8 @@ const categoryNames = {
   tivibu: "Tivibu/Uydu",
   dsl: "Mevsimsel İnternetler",
   gorevli: "Kamu Tarifeleri",
-  cihaz: "Peşin Fiyatına Cihazlar"
+  cihaz: "Peşin Fiyatına Cihazlar",
+  aksesuar: "Aksesuarlarımız"
 };
 
 const categoryWatermarks = {
@@ -2349,7 +2530,8 @@ const categoryWatermarks = {
   tivibu: "TİVİBU TV",
   dsl: "MEVSİMSEL",
   gorevli: "KAMU",
-  cihaz: "CİHAZ"
+  cihaz: "CİHAZ",
+  aksesuar: "%30"
 };
 
 const cards = document.querySelector("#cards");
@@ -2517,7 +2699,8 @@ function detailsFor(item) {
       dsl: ["ADSL/FTTC altyapısı uygun olan mevsimsel internet müşterileri.", "Hız seçenekleri adres altyapısına göre değişebilir."],
       gorevli: ["İlgili kamu kurumu/personel şartını sağlayan bireysel müşteriler.", "Referans veya belge kontrolü gerekebilir."],
       tivibu: ["Yeni Tivibu, Tivibu Ev veya Tivibu Uydu müşterileri.", "IPTV/Uydu kurulum uygunluğu satış öncesinde kontrol edilmelidir."],
-      cihaz: ["Türk Telekom hattı üzerine cihaz alımına uygun müşteriler.", "Taksit, limit ve stok uygunluğu mağazada kontrol edilir."]
+      cihaz: ["Türk Telekom hattı üzerine cihaz alımına uygun müşteriler.", "Taksit, limit ve stok uygunluğu mağazada kontrol edilir."],
+      aksesuar: ["Mağazadan aksesuar almak isteyen müşteriler.", "İndirim kodu oluşturmak için müşteri telefon numarası girilir."]
     },
     privileges: {
       mobil: ["Aşımsızlık veya kontrol paketi uygun tarifelerde sunulur.", "Türk Telekomlularla konuşma, WhatsApp, Prime ya da dijital servis faydaları tarifeye göre değişir."],
@@ -2525,7 +2708,8 @@ function detailsFor(item) {
       dsl: ["Limitsiz mevsimsel internet hız seçenekleri.", "Düşük hız ihtiyacı olan müşterilere uygun giriş paketleri."],
       gorevli: ["Kamu personeline özel fiyatlar.", "Aşmayan tarife, 1000 SMS ve yurt dışı kullanım faydaları MEB tarifelerinde öne çıkar."],
       tivibu: ["Tivibu GO hediyesi.", "Aktivasyon dahil paket seçenekleri.", "Uydu tarafında ücretsiz self kurulum seçenekleri."],
-      cihaz: ["Peşin fiyatına cihaz fırsatı.", "Hattın üzerine ödeme kolaylığı.", "Mağazada uygunluk ve limit kontrolü."]
+      cihaz: ["Peşin fiyatına cihaz fırsatı.", "Hattın üzerine ödeme kolaylığı.", "Mağazada uygunluk ve limit kontrolü."],
+      aksesuar: ["Telefon numarasıyla kişiye özel indirim kodu.", "Aksesuar alışverişlerinde %30 indirim.", "Kod mağaza içinde personel kontrolüyle uygulanır."]
     },
     commitment: {
       mobil: ["Taahhüt ve kayıt SMS’i tarifeye göre değişir; satış ekranındaki güncel SMS formatı kontrol edilmelidir.", "Kontrol Sizde için uygun tarifelerde KONTROL SIZDE yazıp 5555’e SMS gönderilebilir."],
@@ -2533,7 +2717,8 @@ function detailsFor(item) {
       dsl: ["Taahhüt süresi ve modem/IPTV bedelleri kampanyaya göre kontrol edilmelidir."],
       gorevli: ["MEB tarifeleri için MEB XGB TCKN yazıp 5555’e SMS gönderilir.", "Referansla geçişte referans numarası 6008’e gönderilir."],
       tivibu: ["Tivibu paketlerinde taahhüt süresi 12 veya 18 ay olabilir.", "Uydu self kurulum ve aktivasyon koşulları paket türüne göre kontrol edilir."],
-      cihaz: ["Cihaz taksiti ve ödeme planı mağazada başvuru sırasında teyit edilir.", "Satış limit ve stok uygunluğuna göre tamamlanır."]
+      cihaz: ["Cihaz taksiti ve ödeme planı mağazada başvuru sırasında teyit edilir.", "Satış limit ve stok uygunluğuna göre tamamlanır."],
+      aksesuar: ["Kod oluşturma işlemi satış öncesi bilgilendirme amaçlıdır.", "İndirim uygulaması stok ve mağaza koşullarına göre teyit edilir."]
     }
   };
 
@@ -2581,6 +2766,10 @@ function detailsFor(item) {
     eligibility = ["Türk Telekom hattı üzerine cihaz alımına uygun müşteriler.", "Taksit ve limit uygunluğu mağazada kontrol edilir.", "Stok durumuna göre işlem yapılır."];
     privileges = ["Peşin fiyatına cihaz fırsatı.", "Hattın üzerine ödeme kolaylığı.", "Mağazada uygunluk ve limit kontrolü.", "WhatsApp ile hızlı bilgi alma.", ...item.features];
     commitment = ["Cihaz taksiti ve ödeme planı mağazada başvuru sırasında teyit edilir.", "Tecno Spark 50 5G için 6 taksit bilgisi girildi.", "Samsung A07 5G için 9 taksit bilgisi girildi."];
+  } else if (item.category === "aksesuar") {
+    eligibility = ["Mağazadan aksesuar almak isteyen müşteriler.", "Kod oluşturmak için telefon numarası girilmesi gerekir."];
+    privileges = ["Telefon numarasına göre %30 indirim kodu oluşturulur.", "Kod müşteri ekranında gösterilir, otomatik gönderilmez.", ...item.features];
+    commitment = ["Kod mağaza içi kullanım için tasarlanmıştır.", "Personel indirim uygunluğunu işlem sırasında kontrol eder."];
   }
 
   return { eligibility, privileges, commitment };
@@ -2596,6 +2785,22 @@ function detailTemplate(item) {
   const whatsappUrl = whatsappPhone
     ? `https://wa.me/${whatsappPhone}?text=${message}`
     : `https://wa.me/?text=${message}`;
+  const discountBlock = item.discountTool ? `
+    <section class="discount-tool" aria-label="Aksesuar indirim kodu oluşturma">
+      <div>
+        <h3>%30 aksesuar indirim kodu</h3>
+        <p>Müşteri telefon numarasını yazın, kod ekranda oluşsun.</p>
+      </div>
+      <label>
+        <span>Telefon numarası</span>
+        <input id="accessoryPhone" type="tel" inputmode="numeric" placeholder="05xx xxx xx xx" autocomplete="tel" />
+      </label>
+      <div class="discount-result" id="discountResult" aria-live="polite">
+        <span>İndirim kodu</span>
+        <strong>Numara bekleniyor</strong>
+      </div>
+    </section>
+  ` : "";
   return `
     <div class="detail-head">
       <div class="detail-head-copy">
@@ -2636,7 +2841,28 @@ function detailTemplate(item) {
         <p>${item.note}</p>
       </div>
     </section>
+    ${discountBlock}
   `;
+}
+
+function buildDiscountCode(phone) {
+  const digits = String(phone).replace(/\D/g, "");
+  if (digits.length < 10) return "";
+  const clean = digits.slice(-10);
+  let sum = 0;
+  clean.split("").forEach((digit, index) => {
+    sum += Number(digit) * (index + 3);
+  });
+  const suffix = String(sum % 10000).padStart(4, "0");
+  return `PRM30-${clean.slice(-4)}-${suffix}`;
+}
+
+function updateDiscountCode(input) {
+  const result = detailModal.querySelector("#discountResult strong");
+  if (!result) return;
+  const code = buildDiscountCode(input.value);
+  result.textContent = code || "Numara bekleniyor";
+  result.classList.toggle("ready", Boolean(code));
 }
 
 function openDetail(index) {
@@ -2705,6 +2931,9 @@ tabs.forEach((tab) => {
     tabs.forEach((item) => item.classList.remove("active"));
     tab.classList.add("active");
     activeCategory = tab.dataset.category;
+    document.querySelectorAll(".tab-group").forEach((group) => {
+      group.open = false;
+    });
     render();
   });
 });
@@ -2724,6 +2953,10 @@ cards.addEventListener("keydown", (event) => {
 
 detailModal.addEventListener("click", (event) => {
   if (event.target.closest("[data-close-detail]")) closeDetail();
+});
+
+detailModal.addEventListener("input", (event) => {
+  if (event.target.matches("#accessoryPhone")) updateDiscountCode(event.target);
 });
 
 document.addEventListener("keydown", (event) => {
