@@ -116,8 +116,30 @@ body::after {
 .top-actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
   justify-content: flex-end;
+}
+
+.top-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.top-tabs .tab {
+  min-height: 36px;
+  padding: 0 10px;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.nav-separator {
+  width: 1px;
+  height: 34px;
+  margin: 0 4px;
+  background: linear-gradient(180deg, transparent, rgba(18, 104, 179, 0.36), transparent);
 }
 
 .pdf-link {
@@ -461,6 +483,65 @@ h1 {
   font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+.live-support {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  margin-top: 16px;
+  padding: 20px;
+  color: var(--ink);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(237, 247, 255, 0.94)),
+    repeating-linear-gradient(135deg, rgba(22, 134, 101, 0.1) 0 2px, transparent 2px 18px);
+  border: 1px solid #c8d9eb;
+  border-left: 7px solid var(--green);
+  border-radius: 8px;
+  box-shadow: 0 16px 36px rgba(22, 56, 96, 0.1);
+}
+
+.support-mark {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  color: #fff;
+  background: linear-gradient(135deg, #168665, #1268b3);
+  border-radius: 8px;
+  font-weight: 950;
+}
+
+.live-support h2,
+.live-support p {
+  margin: 0;
+}
+
+.live-support h2 {
+  font-size: clamp(21px, 2.4vw, 30px);
+  line-height: 1.12;
+}
+
+.live-support p:not(.eyebrow) {
+  margin-top: 7px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.support-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  color: #fff;
+  background: linear-gradient(135deg, #168665, #20b56f);
+  border-radius: 8px;
+  font-weight: 950;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 12px 26px rgba(22, 134, 101, 0.2);
 }
 
 .telekom-strip {
@@ -844,7 +925,7 @@ h1 {
 
 .controls {
   display: grid;
-  grid-template-columns: minmax(250px, 430px) 1fr;
+  grid-template-columns: minmax(250px, 520px);
   gap: 16px;
   align-items: end;
   margin-top: 18px;
@@ -1506,6 +1587,7 @@ h1 {
 @media (max-width: 900px) {
   .hero,
   .controls,
+  .live-support,
   .telekom-strip,
   .visual-board,
   .stores-section,
@@ -1520,6 +1602,23 @@ h1 {
 
   .tabs {
     justify-content: flex-start;
+  }
+
+  .topbar {
+    align-items: flex-start;
+  }
+
+  .top-actions,
+  .top-tabs {
+    justify-content: flex-start;
+  }
+
+  .live-support {
+    align-items: flex-start;
+  }
+
+  .support-button {
+    width: fit-content;
   }
 
   .cards {
@@ -1548,6 +1647,27 @@ h1 {
 
   .brand span {
     display: none;
+  }
+
+  .top-actions {
+    width: 100%;
+  }
+
+  .top-tabs {
+    width: 100%;
+  }
+
+  .top-tabs .tab {
+    min-height: 34px;
+    padding: 0 9px;
+    font-size: 12px;
+  }
+
+  .nav-separator {
+    width: 100%;
+    height: 1px;
+    margin: 2px 0;
+    background: linear-gradient(90deg, transparent, rgba(18, 104, 179, 0.36), transparent);
   }
 
   .hero {
@@ -1602,6 +1722,20 @@ h1 {
 
   .countdown strong {
     font-size: 23px;
+  }
+
+  .live-support {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .support-mark {
+    width: 48px;
+    height: 48px;
+  }
+
+  .support-button {
+    width: 100%;
   }
 
   .orbit-one {
@@ -1661,6 +1795,16 @@ h1 {
         </span>
       </a>
       <nav class="top-actions" aria-label="Hızlı bağlantılar">
+        <div class="top-tabs" role="tablist" aria-label="Kategori">
+          <button class="tab active" type="button" data-category="all">Tümü</button>
+          <button class="tab" type="button" data-category="mobil">Mobil</button>
+          <button class="tab" type="button" data-category="ev">Ev İnterneti</button>
+          <button class="tab" type="button" data-category="tivibu">Tivibu/Uydu</button>
+          <button class="tab" type="button" data-category="dsl">Mevsimsel İnternetler</button>
+          <button class="tab" type="button" data-category="gorevli">Kamu Tarifeleri</button>
+          <button class="tab" type="button" data-category="cihaz">Peşin Fiyatına Cihazlar</button>
+        </div>
+        <span class="nav-separator" aria-hidden="true"></span>
         <a class="pdf-link" href="magazalarimiz.html">Mağazalarımız</a>
         <a class="pdf-link" href="personellerimiz.html">Personellerimiz</a>
       </nav>
@@ -1706,6 +1850,16 @@ h1 {
         </div>
       </section>
 
+      <section class="live-support home-section" aria-label="Canlı destek">
+        <div class="support-mark">7/24</div>
+        <div>
+          <p class="eyebrow dark">Canlı destek</p>
+          <h2>Tarife, cihaz ve başvuru sorularınız için hızlı destek alın.</h2>
+          <p>WhatsApp üzerinden ekibimize ulaşın; uygun paket ve başvuru adımlarında size yardımcı olalım.</p>
+        </div>
+        <a class="support-button" href="https://wa.me/905010735555?text=Merhaba%2C%20Primetech%20canl%C4%B1%20destek%20%C3%BCzerinden%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener">Canlı desteğe bağlan</a>
+      </section>
+
       <section class="telekom-strip home-section" aria-label="Türk Telekom özel alanı">
         <div>
           <p class="eyebrow dark">Türk Telekom özel alanı</p>
@@ -1724,15 +1878,6 @@ h1 {
           <span>Arama</span>
           <input id="searchInput" type="search" placeholder="Örn: 30 gb, selfy, öğretmen meb, tivibu, mevsimsel, 100 mbps" autocomplete="off" />
         </label>
-        <div class="tabs" role="tablist" aria-label="Kategori">
-          <button class="tab active" type="button" data-category="all">Tümü</button>
-          <button class="tab" type="button" data-category="mobil">Mobil</button>
-          <button class="tab" type="button" data-category="ev">Ev İnterneti</button>
-          <button class="tab" type="button" data-category="tivibu">Tivibu/Uydu</button>
-          <button class="tab" type="button" data-category="dsl">Mevsimsel İnternetler</button>
-          <button class="tab" type="button" data-category="gorevli">Görevli</button>
-          <button class="tab" type="button" data-category="cihaz">Peşin Fiyatına Cihazlar</button>
-        </div>
       </section>
 
       <section class="status-row home-section">
@@ -2171,7 +2316,7 @@ const categoryNames = {
   ev: "Ev İnterneti",
   tivibu: "Tivibu/Uydu",
   dsl: "Mevsimsel İnternetler",
-  gorevli: "Görevli",
+  gorevli: "Kamu Tarifeleri",
   cihaz: "Peşin Fiyatına Cihazlar"
 };
 
