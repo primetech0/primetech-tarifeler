@@ -206,6 +206,96 @@ body::after {
   background: #11365d;
 }
 
+.side-promos {
+  position: fixed;
+  top: 156px;
+  left: 18px;
+  right: 18px;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.side-promo {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  width: min(210px, calc((100vw - 1220px) / 2 - 24px));
+  min-width: 148px;
+  padding: 18px 16px 16px;
+  text-align: left;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 8px;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 18px 36px rgba(13, 40, 70, 0.18);
+  transform: rotate(-1.5deg);
+}
+
+.side-promo::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -42px;
+  width: 2px;
+  height: 42px;
+  background: linear-gradient(180deg, rgba(17, 54, 93, 0.22), rgba(17, 54, 93, 0.7));
+}
+
+.side-promo::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 7px);
+  top: -9px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border: 3px solid rgba(17, 54, 93, 0.48);
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(13, 40, 70, 0.18);
+}
+
+.side-promo:hover,
+.side-promo:focus {
+  transform: translateY(-3px) rotate(0deg);
+  outline: none;
+}
+
+.side-promo-left {
+  background:
+    linear-gradient(135deg, rgba(22, 134, 101, 0.96), rgba(18, 104, 179, 0.95)),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 16px);
+}
+
+.side-promo-right {
+  background:
+    linear-gradient(135deg, rgba(17, 54, 93, 0.98), rgba(18, 104, 179, 0.96)),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0 1px, transparent 1px 16px);
+  transform: rotate(1.5deg);
+}
+
+.promo-kicker {
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.side-promo strong {
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.05;
+}
+
+.side-promo small {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
 main {
   width: min(1180px, calc(100% - 28px));
   margin: 0 auto;
@@ -1727,6 +1817,33 @@ h1 {
   color: var(--muted);
 }
 
+@media (max-width: 1380px) {
+  .side-promos {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: min(1180px, calc(100% - 28px));
+    margin: 18px auto 0;
+    pointer-events: auto;
+  }
+
+  .side-promo {
+    width: 100%;
+    min-width: 0;
+    transform: none;
+  }
+
+  .side-promo-right {
+    transform: none;
+  }
+
+  .side-promo::before,
+  .side-promo::after {
+    display: none;
+  }
+}
+
 @media (max-width: 900px) {
   .hero,
   .controls,
@@ -1771,6 +1888,10 @@ h1 {
 
   .support-button {
     width: fit-content;
+  }
+
+  .side-promos {
+    grid-template-columns: 1fr;
   }
 
   .cards {
@@ -1991,6 +2112,19 @@ h1 {
         <a class="pdf-link" href="personellerimiz.html">Personellerimiz</a>
       </nav>
     </header>
+
+    <aside class="side-promos" aria-label="Öne çıkan kampanyalar">
+      <button class="side-promo side-promo-left" type="button" data-promo-detail="aksesuar">
+        <span class="promo-kicker">Aksesuarlarımızda</span>
+        <strong>%30 indirim</strong>
+        <small>Kılıf, ekran koruyucu ve lens koruyucuda kod al</small>
+      </button>
+      <button class="side-promo side-promo-right" type="button" data-promo-category="ev">
+        <span class="promo-kicker">Bugüne özel</span>
+        <strong>İlk 5 ev interneti müşterimize kablosuz kulaklık hediye</strong>
+        <small>Ev interneti tarifelerine göz at</small>
+      </button>
+    </aside>
 
     <main id="top">
       <section class="hero home-section">
@@ -2536,6 +2670,7 @@ const detailModal = document.querySelector("#detailModal");
 const detailContent = document.querySelector("#detailContent");
 const homeSections = document.querySelectorAll(".home-section");
 const routeSections = document.querySelectorAll(".route-section");
+const promoButtons = document.querySelectorAll("[data-promo-category], [data-promo-detail]");
 const whatsappPhone = "905010735555";
 let activeCategory = "all";
 
@@ -2800,6 +2935,7 @@ function detailTemplate(item) {
       </div>
       <a class="whatsapp-button detail-whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener">Bilgi al</a>
     </div>
+    ${discountBlock}
     <section class="detail-section">
       <h3>Detay fiyatlandırma</h3>
       <div class="detail-table-wrap">
@@ -2831,7 +2967,6 @@ function detailTemplate(item) {
         <p>${item.note}</p>
       </div>
     </section>
-    ${discountBlock}
   `;
 }
 
@@ -2910,15 +3045,38 @@ function render() {
   resultCount.textContent = `${filtered.length} tarife ailesi gösteriliyor`;
 }
 
+function selectCategory(category, shouldScroll = true) {
+  tabs.forEach((item) => {
+    item.classList.toggle("active", item.dataset.category === category);
+  });
+  activeCategory = category;
+  document.querySelectorAll(".tab-group").forEach((group) => {
+    group.open = false;
+  });
+  render();
+  if (shouldScroll) {
+    document.querySelector(".controls")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
-    tabs.forEach((item) => item.classList.remove("active"));
-    tab.classList.add("active");
-    activeCategory = tab.dataset.category;
-    document.querySelectorAll(".tab-group").forEach((group) => {
-      group.open = false;
-    });
-    render();
+    selectCategory(tab.dataset.category, false);
+  });
+});
+
+promoButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const detailCategory = button.dataset.promoDetail;
+    if (detailCategory) {
+      selectCategory(detailCategory, false);
+      const index = tariffs.findIndex((item) => item.category === detailCategory);
+      if (index >= 0) openDetail(index);
+      return;
+    }
+    if (button.dataset.promoCategory) {
+      selectCategory(button.dataset.promoCategory);
+    }
   });
 });
 
