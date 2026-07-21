@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Primetech Bilişim">
+  <rect width="512" height="512" fill="#061321"/>
+  <path d="M256 54 416 146v220L256 458 96 366V146Z" fill="none" stroke="#24bdf1" stroke-width="22"/>
+  <circle cx="96" cy="146" r="24" fill="#061321" stroke="#24bdf1" stroke-width="14"/>
+  <circle cx="416" cy="146" r="24" fill="#061321" stroke="#24bdf1" stroke-width="14"/>
+  <circle cx="96" cy="366" r="24" fill="#061321" stroke="#1774df" stroke-width="14"/>
+  <circle cx="416" cy="366" r="24" fill="#061321" stroke="#1774df" stroke-width="14"/>
+  <text x="256" y="326" text-anchor="middle" font-family="Arial, sans-serif" font-size="218" font-weight="800" fill="#ffffff">P<tspan fill="#168cf0">B</tspan></text>
+</svg>
